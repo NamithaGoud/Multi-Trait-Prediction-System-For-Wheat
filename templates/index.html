@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Phenotypic traits predictions</title>
+    <style>
+        body {
+            background-image: url("https://thumbs.dreamstime.com/b/wheat-farm-background-wallpaper-abstract-vintage-sunset-65850813.jpg");
+            background-size: cover; 
+            color: #333;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0; /* Remove default margin */
+            padding-top: 200px; /* Adjusted padding-top for space at the top */
+            padding-left: 600px;
+        }
+
+        .hlo {
+            padding-top: 20px; /* Adjusted padding-top for space between input and button */
+        }
+    </style>
+
+    <script>
+        function validateForm() {
+            var sequenceInput = document.getElementsByName("sequence")[0].value;
+            var regex=/^[ATCG]{14}$/;
+            if (sequenceInput.trim() === "") {
+                alert("Please enter the Allele Sequence before submitting.");
+                return false; // Prevent form submission
+            }
+            if(!regex.test(sequenceInput)){
+                alert("Allele Sequence should be between 1-14 and it should contain only ATGC");
+                return false;
+            }
+            return true; // Allow form submission
+        }
+    </script>
+</head>
+<body>
+    <h1>Multitrait Prediction</h1>
+    <form method="POST" action="/predict" enctype="multipart/form-data" onsubmit="return validateForm()">
+        <label style="font-size: larger;">Enter the Allele Sequence:</label>
+        <input type="text" name="sequence" />
+        <div class="hlo">
+            <input type="submit" value="Predict" />
+        </div>
+    </form>
+</body>
+</html>
